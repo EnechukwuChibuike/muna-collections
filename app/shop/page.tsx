@@ -17,7 +17,21 @@ import Link from "next/link";
 import { useCart } from "@/contexts/cart-context";
 import { useWishlist } from "@/contexts/wishlist-context";
 
-const products = [
+type PRODUCT = {
+  id: number;
+  name: string;
+  price: number;
+  originalPrice: number;
+  image: string;
+  category: string;
+  length: string;
+  texture: string;
+  color: string;
+  rating: number;
+  reviews: number;
+};
+
+const products: PRODUCT[] = [
   {
     id: 1,
     name: "Luxury Straight Bundle",
@@ -147,7 +161,7 @@ export default function ShopPage() {
     }
   });
 
-  const handleAddToCart = (product: any) => {
+  const handleAddToCart = (product: PRODUCT) => {
     addItem({
       id: product.id,
       name: product.name,
@@ -156,7 +170,7 @@ export default function ShopPage() {
     });
   };
 
-  const handleWishlistToggle = (product: any) => {
+  const handleWishlistToggle = (product: PRODUCT) => {
     if (isInWishlist(product.id)) {
       removeFromWishlist(product.id);
     } else {

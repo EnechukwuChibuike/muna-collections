@@ -1,31 +1,53 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Search } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface SearchModalProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 const searchSuggestions = [
-  { id: 1, name: "Straight Hair Extensions", image: "/placeholder.svg?height=60&width=60", price: 299 },
-  { id: 2, name: "Curly Wigs", image: "/placeholder.svg?height=60&width=60", price: 459 },
-  { id: 3, name: "Body Wave Bundles", image: "/placeholder.svg?height=60&width=60", price: 199 },
-]
+  {
+    id: 1,
+    name: "Straight Hair Extensions",
+    image: "/placeholder.svg?height=60&width=60",
+    price: 299,
+  },
+  {
+    id: 2,
+    name: "Curly Wigs",
+    image: "/placeholder.svg?height=60&width=60",
+    price: 459,
+  },
+  {
+    id: 3,
+    name: "Body Wave Bundles",
+    image: "/placeholder.svg?height=60&width=60",
+    price: 199,
+  },
+];
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="font-playfair text-2xl">Search Products</DialogTitle>
+          <DialogTitle className="font-playfair text-2xl">
+            Search Products
+          </DialogTitle>
         </DialogHeader>
 
         <div className="relative">
@@ -59,7 +81,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                   />
                   <div className="flex-1">
                     <h4 className="font-medium">{item.name}</h4>
-                    <p className="text-amber-600 font-semibold">${item.price}</p>
+                    <p className="text-amber-600 font-semibold">
+                      ${item.price}
+                    </p>
                   </div>
                 </Link>
               ))}
@@ -69,11 +93,13 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
         {searchQuery !== "" && (
           <div>
-            <p className="text-gray-600 mb-4">Searching for "{searchQuery}"...</p>
+            <p className="text-gray-600 mb-4">
+              Searching for &quot;{searchQuery}&quot;...
+            </p>
             {/* Search results would be displayed here */}
           </div>
         )}
       </DialogContent>
     </Dialog>
-  )
+  );
 }
