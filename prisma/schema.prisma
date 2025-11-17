@@ -8,11 +8,32 @@ datasource db {
 }
 
 model User {
-  id        String   @id @map("_id") @default(auto()) @db.ObjectId
+  id        String    @id @map("_id") @default(auto()) @db.ObjectId
   name      String
-  email     String   @unique
+  email     String    @unique
   password  String
-  role      Role     @default(USER)
+  role      Role      @default(USER)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  address   Address?
+}
+
+model Address {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+
+  // one user can only have one address
+  userId    String   @unique @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+
+  fullName  String
+  phone     String
+  country   String
+  state     String
+  city      String
+  street    String
+  postal    String
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

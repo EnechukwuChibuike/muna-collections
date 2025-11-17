@@ -1,145 +1,195 @@
 "use client";
 
-import { useCart } from "@/contexts/cart-context";
 import { useState } from "react";
+import { useCart } from "@/contexts/cart-context";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function CheckoutContent() {
-  const { items, total, updateQuantity, removeItem, clearCart } = useCart();
+export default function CheckoutContent({
+  savedAddress,
+}: {
+  savedAddress: any;
+}) {
+  const { items, total } = useCart();
   const [loading, setLoading] = useState(false);
 
-  const handlePayment = async () => {
+  const [form, setForm] = useState({
+    fullName: savedAddress?.fullName || "",
+    phone: savedAddress?.phone || "",
+    country: savedAddress?.country || "",
+    state: savedAddress?.state || "",
+    city: savedAddress?.city || "",
+    street: savedAddress?.street || "",
+    postal: savedAddress?.postal || "",
+    paymentMethod: "paystack",
+  });
+
+  const update = (field: string, value: string) =>
+    setForm((prev) => ({ ...prev, [field]: value }));
+
+  const handleSubmit = async () => {
     setLoading(true);
-    setTimeout(() => setLoading(false), 2000);
+
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      body: JSON.stringify({ form, items }),
+    });
+
+    const data = await res.json();
+    setLoading(false);
+
+    if (data.url) window.location.href = data.url;
   };
 
-  if (items.length === 0) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center">
-        <p className="text-gray-500 text-lg mb-4">Your cart is empty.</p>
-        <Link href="/shop">
-          <Button className="gold-gradient text-black cursor-pointer">
-            Go to Shop
-          </Button>
-        </Link>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="container mx-auto">
-        <h1 className="font-playfair text-4xl font-bold mb-8">Checkout</h1>
+    <div className="min-h-screen py-10 px-4 bg-gray-50">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8">
+        {/* LEFT SIDE — ADDRESS FORM */}
+        <div className="flex-1 bg-white shadow rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">Shipping Information</h2>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Cart Summary */}
-          <div className="flex-1 bg-white rounded-lg shadow p-6">
-            <h2 className="font-semibold text-xl mb-4">Your Cart</h2>
-            <div className="space-y-4">
-              {items.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex items-center justify-between"
-                >
-                  <div className="flex items-center gap-4">
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      width={80}
-                      height={80}
-                      className="rounded"
-                    />
-                    <div>
-                      <p className="font-medium">{item.name}</p>
-                      <p className="text-gray-500 text-sm">
-                        {item.length ? `Length: ${item.length}` : ""}{" "}
-                        {item.color ? `Color: ${item.color}` : ""}
-                      </p>
-                      <p className="text-gray-700 font-semibold">
-                        ${item.price}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="number"
-                      min={1}
-                      value={item.quantity}
-                      onChange={(e) =>
-                        updateQuantity(item.id, parseInt(e.target.value))
-                      }
-                      className="w-16 border rounded px-2 py-1 text-center"
-                    />
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => removeItem(item.id)}
-                    >
-                      Remove
-                    </Button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input
+              value={form.fullName}
+              onChange={(e) => update("fullName", e.target.value)}
+              placeholder="Full Name"
+              className="border px-3 py-2 rounded w-full"
+            />
+
+            <input
+              value={form.phone}
+              onChange={(e) => update("phone", e.target.value)}
+              placeholder="Phone Number"
+              className="border px-3 py-2 rounded w-full"
+            />
+
+            <input
+              value={form.country}
+              onChange={(e) => update("country", e.target.value)}
+              placeholder="Country"
+              className="border px-3 py-2 rounded w-full"
+            />
+
+            <input
+              value={form.state}
+              onChange={(e) => update("state", e.target.value)}
+              placeholder="State"
+              className="border px-3 py-2 rounded w-full"
+            />
+
+            <input
+              value={form.city}
+              onChange={(e) => update("city", e.target.value)}
+              placeholder="City"
+              className="border px-3 py-2 rounded w-full"
+            />
+
+            <div className="sm:col-span-2">
+              <input
+                value={form.street}
+                onChange={(e) => update("street", e.target.value)}
+                placeholder="Street Address"
+                className="border px-3 py-2 rounded w-full"
+              />
+            </div>
+
+            <input
+              value={form.postal}
+              onChange={(e) => update("postal", e.target.value)}
+              placeholder="Postal Code"
+              className="border px-3 py-2 rounded w-full"
+            />
+          </div>
+
+          {/* Payment Method */}
+          <h3 className="mt-6 font-semibold">Payment Method</h3>
+
+          <div className="mt-3 flex flex-col gap-3">
+            {/* Paystack (default) */}
+            <label className="flex items-center gap-3 border p-3 rounded cursor-pointer">
+              <input
+                type="radio"
+                name="payment"
+                value="paystack"
+                checked={form.paymentMethod === "paystack"}
+                onChange={() => update("paymentMethod", "paystack")}
+              />
+              <span className="font-medium">Paystack</span>
+            </label>
+
+            {/* Flutterwave */}
+            <label className="flex items-center gap-3 border p-3 rounded cursor-pointer">
+              <input
+                type="radio"
+                name="payment"
+                value="flutterwave"
+                checked={form.paymentMethod === "flutterwave"}
+                onChange={() => update("paymentMethod", "flutterwave")}
+              />
+              <span className="font-medium">Flutterwave</span>
+            </label>
+
+            {/* Cash on Delivery */}
+            <label className="flex items-center gap-3 border p-3 rounded cursor-pointer">
+              <input
+                type="radio"
+                name="payment"
+                value="cod"
+                checked={form.paymentMethod === "cod"}
+                onChange={() => update("paymentMethod", "cod")}
+              />
+              <span className="font-medium">Cash on Delivery</span>
+            </label>
+          </div>
+        </div>
+
+        {/* RIGHT SIDE — ORDER SUMMARY */}
+        <div className="w-full lg:w-96 bg-white shadow rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+
+          <div className="space-y-4">
+            {items.map((item) => (
+              <div key={item.id} className="flex justify-between items-center">
+                <div className="flex gap-3">
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    width={60}
+                    height={60}
+                    className="rounded"
+                  />
+                  <div>
+                    <p className="font-medium">{item.name}</p>
+                    <p className="text-sm text-gray-500">
+                      {item.quantity} × ${item.price}
+                    </p>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              className="mt-4 bg-transparent"
-              onClick={clearCart}
-            >
-              Clear Cart
-            </Button>
+                <p className="font-semibold">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </p>
+              </div>
+            ))}
           </div>
 
-          {/* Payment Summary */}
-          <div className="w-full lg:w-96 bg-white rounded-lg shadow p-6 flex flex-col gap-4">
-            <h2 className="font-semibold text-xl">Order Summary</h2>
-            <div className="flex justify-between text-gray-700">
-              <span>Subtotal:</span>
-              <span>${total.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between text-gray-700">
-              <span>Shipping:</span>
-              <span>$0.00</span>
-            </div>
-            <div className="flex justify-between text-gray-900 font-bold text-lg">
-              <span>Total:</span>
-              <span>${total.toFixed(2)}</span>
-            </div>
+          <hr className="my-4" />
 
-            <Button
-              className="gold-gradient text-black font-semibold mt-4 flex justify-center items-center"
-              onClick={handlePayment}
-              disabled={loading}
-            >
-              {loading ? (
-                <svg
-                  className="animate-spin h-5 w-5 mr-2 text-black"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v8H4z"
-                  ></path>
-                </svg>
-              ) : null}
-              {loading ? "Processing..." : "Proceed to Payment"}
-            </Button>
+          <div className="flex justify-between font-semibold text-lg">
+            <p>Total:</p>
+            <p>${total.toFixed(2)}</p>
           </div>
+
+          <Button
+            onClick={handleSubmit}
+            disabled={loading}
+            className="gold-gradient text-black w-full mt-4 flex justify-center items-center"
+          >
+            {loading ? (
+              <div className="animate-spin h-5 w-5 border-2 border-black border-t-transparent rounded-full"></div>
+            ) : (
+              "Proceed to Payment"
+            )}
+          </Button>
         </div>
       </div>
     </div>

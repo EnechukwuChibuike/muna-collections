@@ -1,7 +1,7 @@
-// app/checkout/page.tsx
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
+import prisma from "@/lib/prisma";
 import CheckoutContent from "./CheckoutContent";
 
 export default async function CheckoutPage() {
@@ -11,5 +11,9 @@ export default async function CheckoutPage() {
     redirect("/login?callbackUrl=/checkout");
   }
 
-  return <CheckoutContent />;
+  const address = await prisma.address.findFirst({
+    where: { userId: session.user.id },
+  });
+
+  return <CheckoutContent savedAddress={address} />;
 }
