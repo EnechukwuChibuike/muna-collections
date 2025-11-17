@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { IoLogoWhatsapp } from "react-icons/io5";
 
 export default function ContactPage() {

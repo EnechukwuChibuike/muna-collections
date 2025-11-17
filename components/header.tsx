@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Search, ShoppingBag, Heart, Menu, X, User } from "lucide-react";
+import { ShoppingBag, Heart, Menu, X, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/cart-context";
 import { useWishlist } from "@/contexts/wishlist-context";
