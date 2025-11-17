@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const faqData = [
   {
@@ -110,14 +110,16 @@ const faqData = [
       },
     ],
   },
-]
+];
 
 export default function FAQPage() {
-  const [openItems, setOpenItems] = useState<string[]>([])
+  const [openItems, setOpenItems] = useState<string[]>([]);
 
   const toggleItem = (id: string) => {
-    setOpenItems((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]))
-  }
+    setOpenItems((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -128,7 +130,8 @@ export default function FAQPage() {
             Frequently Asked Questions
           </h1>
           <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-            Find answers to common questions about our products, shipping, care instructions, and more.
+            Find answers to common questions about our products, shipping, care
+            instructions, and more.
           </p>
         </div>
       </section>
@@ -142,17 +145,22 @@ export default function FAQPage() {
               </h2>
               <div className="space-y-4">
                 {category.questions.map((faq, questionIndex) => {
-                  const itemId = `${categoryIndex}-${questionIndex}`
-                  const isOpen = openItems.includes(itemId)
+                  const itemId = `${categoryIndex}-${questionIndex}`;
+                  const isOpen = openItems.includes(itemId);
 
                   return (
-                    <Card key={questionIndex} className="border-0 shadow-sm hover:shadow-md transition-shadow">
+                    <Card
+                      key={questionIndex}
+                      className="border-0 shadow-sm hover:shadow-md transition-shadow"
+                    >
                       <CardContent className="p-0">
                         <button
                           onClick={() => toggleItem(itemId)}
                           className="w-full text-left p-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
                         >
-                          <h3 className="font-semibold text-lg text-gray-900 pr-4">{faq.question}</h3>
+                          <h3 className="font-semibold text-lg text-gray-900 pr-4">
+                            {faq.question}
+                          </h3>
                           {isOpen ? (
                             <ChevronUp className="h-5 w-5 text-amber-600 flex-shrink-0" />
                           ) : (
@@ -161,12 +169,14 @@ export default function FAQPage() {
                         </button>
                         {isOpen && (
                           <div className="px-6 pb-6">
-                            <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                            <p className="text-gray-700 leading-relaxed">
+                              {faq.answer}
+                            </p>
                           </div>
                         )}
                       </CardContent>
                     </Card>
-                  )
+                  );
                 })}
               </div>
             </div>
@@ -177,10 +187,13 @@ export default function FAQPage() {
         <div className="max-w-2xl mx-auto text-center mt-16">
           <Card className="border-0 shadow-lg gold-gradient">
             <CardContent className="p-8">
-              <h3 className="font-playfair text-2xl font-bold mb-4 text-gray-900">Still Have Questions?</h3>
+              <h3 className="font-playfair text-2xl font-bold mb-4 text-gray-900">
+                Still Have Questions?
+              </h3>
               <p className="text-gray-700 mb-6">
-                Our expert team is here to help! Get personalized assistance with product selection, care instructions,
-                or any other questions you may have.
+                Our expert team is here to help! Get personalized assistance
+                with product selection, care instructions, or any other
+                questions you may have.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -191,12 +204,15 @@ export default function FAQPage() {
                 </a>
                 <button
                   onClick={() => {
-                    const phoneNumber = "+1234567890"
-                    const message = "Hi! I have a question about your hair products."
-                    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
-                    window.open(whatsappUrl, "_blank")
+                    const phoneNumber = "2347038458200";
+                    const message =
+                      "Hi! I have a question about your hair products.";
+                    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+                      message
+                    )}`;
+                    window.open(whatsappUrl, "_blank");
                   }}
-                  className="inline-flex items-center justify-center px-6 py-3 border-2 border-black text-black font-semibold rounded-md hover:bg-black hover:text-white transition-colors"
+                  className="inline-flex items-center cursor-pointer justify-center px-6 py-3 border-2 border-black text-black font-semibold rounded-md hover:bg-black hover:text-white transition-colors"
                 >
                   WhatsApp Chat
                 </button>
@@ -206,5 +222,5 @@ export default function FAQPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

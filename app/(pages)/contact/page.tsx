@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Phone, Mail, Clock, MessageCircle } from "lucide-react";
+import { IoLogoWhatsapp } from "react-icons/io5";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -27,7 +28,7 @@ export default function ContactPage() {
   };
 
   const handleWhatsApp = () => {
-    const phoneNumber = "+1234567890";
+    const phoneNumber = "2347038458200";
     const message = "Hi! I'd like to inquire about your hair collection.";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
@@ -66,11 +67,11 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold mb-1">Address</h3>
                     <p className="text-gray-600">
-                      123 Luxury Lane
+                      15 Abakaliki road
                       <br />
-                      Beauty District
+                      Awka, Anambra State
                       <br />
-                      New York, NY 10001
+                      Nigeria
                     </p>
                   </div>
                 </div>
@@ -79,7 +80,7 @@ export default function ContactPage() {
                   <Phone className="h-6 w-6 text-amber-600 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Phone</h3>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                    <p className="text-gray-600">+234 703 845 8200</p>
                   </div>
                 </div>
 
@@ -87,7 +88,7 @@ export default function ContactPage() {
                   <Mail className="h-6 w-6 text-amber-600 mt-1" />
                   <div>
                     <h3 className="font-semibold mb-1">Email</h3>
-                    <p className="text-gray-600">hello@munacollection.com</p>
+                    <p className="text-gray-600">munacollectionz@gmail.com</p>
                   </div>
                 </div>
 
@@ -108,7 +109,7 @@ export default function ContactPage() {
             {/* WhatsApp Card */}
             <Card className="border-0 shadow-lg bg-green-50">
               <CardContent className="p-6 text-center">
-                <MessageCircle className="h-12 w-12 text-green-600 mx-auto mb-4" />
+                <IoLogoWhatsapp className="h-12 w-12 text-green-600 mx-auto mb-4" />
                 <h3 className="font-semibold text-lg mb-2">
                   Chat with Us on WhatsApp
                 </h3>

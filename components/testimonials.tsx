@@ -8,7 +8,7 @@ const testimonials = [
     name: "Sarah Johnson",
     image: "/placeholder.svg?height=80&width=80",
     rating: 5,
-    text: "The quality is absolutely incredible! I've never had hair extensions that looked and felt so natural. Muna Collection has exceeded all my expectations.",
+    text: "The quality is absolutely incredible! I've never had hair extensions that looked and felt so natural. Muna Collectionz has exceeded all my expectations.",
     product: "Luxury Straight Bundle",
   },
   {

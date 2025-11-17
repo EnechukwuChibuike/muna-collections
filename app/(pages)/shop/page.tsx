@@ -473,14 +473,12 @@ export default function ShopPage() {
                         </span>
                       )}
                     </div>
-                    {viewMode === "list" && (
-                      <Button
-                        className="w-full gold-gradient text-black font-semibold hover:opacity-90"
-                        onClick={() => handleAddToCart(product)}
-                      >
-                        Add to Cart
-                      </Button>
-                    )}
+                    <Button
+                      className="w-full gold-gradient text-black font-semibold hover:opacity-90"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Add to Cart
+                    </Button>
                   </CardContent>
                 </Card>
               ))}

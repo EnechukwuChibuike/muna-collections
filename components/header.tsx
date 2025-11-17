@@ -77,15 +77,15 @@ export default function Header() {
             </nav>
 
             {/* Actions */}
-            <div className="flex items-center space-x-2">
-              <Button
+            <div className="flex items-center space-x-1">
+              {/* <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsSearchOpen(true)}
                 className="hover:bg-amber-50"
               >
                 <Search className="h-5 w-5" />
-              </Button>
+              </Button> */}
 
               <Link href="/account">
                 <Button

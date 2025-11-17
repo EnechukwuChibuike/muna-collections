@@ -7,14 +7,25 @@ export default function AboutPage() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-20 luxury-gradient">
-        <div className="container mx-auto px-4">
+        <div className="absolute inset-0 z-0">
+          <video
+            className="absolute top-0 left-0 w-full h-full bg-cover object-cover"
+            src="/munavideos.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+        <div className="relative z-10 container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-playfair text-5xl md:text-6xl font-bold mb-6 text-gray-900">
+            <h1 className="font-playfair text-5xl md:text-6xl font-bold mb-6 text-white">
               Our Story
             </h1>
-            <p className="text-xl text-gray-700 leading-relaxed">
+            <p className="text-xl text-white leading-relaxed">
               Founded with a passion for empowering women through premium hair
-              solutions, Muna Collection represents the pinnacle of luxury and
+              solutions, Muna Collectionz represents the pinnacle of luxury and
               quality in the hair industry.
             </p>
           </div>
@@ -31,7 +42,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-gray-700 leading-relaxed">
                 <p>
-                  Muna Collection was born from a simple yet powerful vision:
+                  Muna Collectionz was born from a simple yet powerful vision:
                   every woman deserves to feel confident and beautiful in her
                   own skin. Our founder, inspired by her own journey with hair,
                   recognized the need for premium quality hair extensions and
@@ -41,7 +52,7 @@ export default function AboutPage() {
                   What started as a personal quest for the perfect hair solution
                   has evolved into a brand that serves thousands of women
                   worldwide, each seeking that perfect blend of quality, style,
-                  and confidence that only Muna Collection can provide.
+                  and confidence that only Muna Collectionz can provide.
                 </p>
                 <p>
                   Today, we continue to push the boundaries of what&apos;s
@@ -53,7 +64,7 @@ export default function AboutPage() {
             </div>
             <div className="relative">
               <Image
-                src="/placeholder.svg?height=600&width=500"
+                src="/munaceo.jpg"
                 alt="Our founder"
                 width={500}
                 height={600}
@@ -114,7 +125,7 @@ export default function AboutPage() {
               <p className="text-gray-700">
                 We continuously innovate our techniques and products, staying
                 ahead of trends while maintaining the timeless elegance that
-                defines the Muna Collection brand.
+                defines the Muna Collectionz brand.
               </p>
             </div>
           </div>
@@ -130,8 +141,8 @@ export default function AboutPage() {
                 What Makes Us Different
               </h2>
               <p className="text-lg text-gray-600">
-                Discover the Muna Collection advantage that sets us apart in the
-                luxury hair industry
+                Discover the Muna Collectionz advantage that sets us apart in
+                the luxury hair industry
               </p>
             </div>
 
@@ -228,9 +239,9 @@ export default function AboutPage() {
                       Lifetime Support
                     </h3>
                     <p className="text-gray-700">
-                      Your relationship with Muna Collection doesn&apos;t end at
-                      purchase. We provide ongoing care guidance and support for
-                      the life of your hair.
+                      Your relationship with Muna Collectionz doesn&apos;t end
+                      at purchase. We provide ongoing care guidance and support
+                      for the life of your hair.
                     </p>
                   </div>
                 </div>
@@ -248,7 +259,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
             Join thousands of satisfied customers who have discovered the luxury
-            and quality that only Muna Collection can provide.
+            and quality that only Muna Collectionz can provide.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/shop">
