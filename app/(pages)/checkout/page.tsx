@@ -15,5 +15,16 @@ export default async function CheckoutPage() {
     where: { userId: session.user.id },
   });
 
-  return <CheckoutContent savedAddress={address} />;
+  // Cast paymentMethod to the expected union type
+  const savedAddress = address
+    ? {
+        ...address,
+        paymentMethod: address.paymentMethod as
+          | "paystack"
+          | "flutterwave"
+          | "cod",
+      }
+    : null;
+
+  return <CheckoutContent savedAddress={savedAddress} />;
 }
