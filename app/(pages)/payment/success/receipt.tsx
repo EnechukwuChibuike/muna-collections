@@ -4,7 +4,20 @@ import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
-export default function Receipt({ order, items, address, user }: any) {
+type Order = {
+  reference: string;
+  createdAt: string | Date;
+  amount: number;
+};
+
+type ReceiptProps = {
+  order: Order;
+  items: string[]; // items are strings like "Luxury Straight Bundle x1"
+  address: string; // shippingAddress already parsed as string
+  user: { name?: string }; // only need the name for greeting
+};
+
+export default function Receipt({ order, items, address, user }: ReceiptProps) {
   const receiptRef = useRef<HTMLDivElement>(null);
 
   const downloadPDF = async () => {
@@ -68,7 +81,7 @@ export default function Receipt({ order, items, address, user }: any) {
 
           <h3 className="font-semibold text-foreground mb-2">Items</h3>
           <ul className="space-y-2 mb-4 text-sm text-foreground">
-            {items.map((item: any, idx: number) => (
+            {items.map((item, idx) => (
               <li
                 key={idx}
                 className="flex justify-between border-b border-border py-1"
