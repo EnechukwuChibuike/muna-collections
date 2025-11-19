@@ -17,6 +17,8 @@ model User {
   updatedAt DateTime  @updatedAt
 
   address   Address?
+  orders    Order[]
+
 }
 
 model Address {
@@ -33,6 +35,7 @@ model Address {
   city      String
   street    String
   postal    String
+  paymentMethod String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -41,4 +44,25 @@ model Address {
 enum Role {
   USER
   ADMIN
+}
+
+model Order {
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String       @db.ObjectId
+  reference      String       @unique
+  amount         Int
+  status         OrderStatus  @default(PENDING)
+  paymentMethod  String
+  shippingAddress Json
+  items          Json
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  FAILED
 }

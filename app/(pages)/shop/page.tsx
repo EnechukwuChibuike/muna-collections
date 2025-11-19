@@ -35,8 +35,8 @@ const products: PRODUCT[] = [
   {
     id: 1,
     name: "Luxury Straight Bundle",
-    price: 299,
-    originalPrice: 399,
+    price: 29900,
+    originalPrice: 39900,
     image: "/munawig.jpeg",
     category: "bundles",
     length: "22 inches",
@@ -48,8 +48,8 @@ const products: PRODUCT[] = [
   {
     id: 2,
     name: "Curly Lace Front Wig",
-    price: 459,
-    originalPrice: 599,
+    price: 45900,
+    originalPrice: 59900,
     image: "/munawig.jpeg",
     category: "wigs",
     length: "18 inches",
@@ -61,8 +61,8 @@ const products: PRODUCT[] = [
   {
     id: 3,
     name: "Body Wave Extensions",
-    price: 199,
-    originalPrice: 249,
+    price: 19900,
+    originalPrice: 24900,
     image: "/munawig.jpeg",
     category: "extensions",
     length: "20 inches",
@@ -74,8 +74,8 @@ const products: PRODUCT[] = [
   {
     id: 4,
     name: "Deep Wave Closure",
-    price: 179,
-    originalPrice: 229,
+    price: 17900,
+    originalPrice: 22900,
     image: "/munawig.jpeg",
     category: "closures",
     length: "16 inches",
@@ -87,8 +87,8 @@ const products: PRODUCT[] = [
   {
     id: 5,
     name: "Kinky Straight Wig",
-    price: 389,
-    originalPrice: 489,
+    price: 38900,
+    originalPrice: 48900,
     image: "/munawig.jpeg",
     category: "wigs",
     length: "24 inches",
@@ -100,8 +100,8 @@ const products: PRODUCT[] = [
   {
     id: 6,
     name: "Water Wave Bundle",
-    price: 259,
-    originalPrice: 319,
+    price: 25900,
+    originalPrice: 31900,
     image: "/munawig.jpeg",
     category: "bundles",
     length: "18 inches",
@@ -120,7 +120,7 @@ export default function ShopPage() {
     texture: "all",
     length: "all",
     color: "all",
-    priceRange: [0, 600],
+    priceRange: [0, 100000],
   });
   const [sortBy, setSortBy] = useState("featured");
 
@@ -285,7 +285,7 @@ export default function ShopPage() {
               {/* Price Range */}
               <div className="mb-6">
                 <label className="block text-sm font-medium mb-2">
-                  Price Range: ${filters.priceRange[0]} - $
+                  Price Range: &#8358;{filters.priceRange[0]} - &#8358;
                   {filters.priceRange[1]}
                 </label>
                 <Slider
@@ -465,11 +465,11 @@ export default function ShopPage() {
                     </div>
                     <div className="flex items-center gap-2 mb-4">
                       <span className="text-2xl font-bold text-gray-900">
-                        ${product.price}
+                        &#8358;{product.price}
                       </span>
                       {product.originalPrice > product.price && (
                         <span className="text-lg text-gray-500 line-through">
-                          ${product.originalPrice}
+                          &#8358;{product.originalPrice}
                         </span>
                       )}
                     </div>

@@ -8,8 +8,8 @@ const featuredProducts = [
   {
     id: 1,
     name: "Luxury Straight Bundle",
-    price: 299,
-    originalPrice: 399,
+    price: 29900,
+    originalPrice: 39900,
     image: "/munawig.jpeg",
     rating: 5,
     reviews: 124,
@@ -17,8 +17,8 @@ const featuredProducts = [
   {
     id: 2,
     name: "Curly Lace Front Wig",
-    price: 459,
-    originalPrice: 599,
+    price: 45900,
+    originalPrice: 59900,
     image: "/munawig.jpeg",
     rating: 5,
     reviews: 89,
@@ -26,8 +26,8 @@ const featuredProducts = [
   {
     id: 3,
     name: "Body Wave Extensions",
-    price: 199,
-    originalPrice: 249,
+    price: 19900,
+    originalPrice: 24900,
     image: "/munawig.jpeg",
     rating: 4.8,
     reviews: 156,
@@ -35,8 +35,8 @@ const featuredProducts = [
   {
     id: 4,
     name: "Deep Wave Closure",
-    price: 179,
-    originalPrice: 229,
+    price: 17900,
+    originalPrice: 22900,
     image: "/munawig.jpeg",
     rating: 4.9,
     reviews: 92,
@@ -114,11 +114,11 @@ export default function FeaturedProducts() {
                 </h3>
                 <div className="flex items-center gap-2">
                   <span className="text-2xl font-bold text-gray-900">
-                    ${product.price}
+                    &#8358;{product.price}
                   </span>
                   {product.originalPrice > product.price && (
                     <span className="text-lg text-gray-500 line-through">
-                      ${product.originalPrice}
+                      &#8358;{product.originalPrice}
                     </span>
                   )}
                 </div>
