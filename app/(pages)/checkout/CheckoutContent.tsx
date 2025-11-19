@@ -184,7 +184,7 @@ export default function CheckoutContent({ savedAddress }: CheckoutProps) {
                   <div>
                     <p className="font-medium">{item.name}</p>
                     <p className="text-sm text-gray-500">
-                      {item.quantity} × ${item.price}
+                      {item.quantity} × &#8358;{item.price}
                     </p>
                   </div>
                 </div>
