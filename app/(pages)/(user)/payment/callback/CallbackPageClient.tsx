@@ -17,6 +17,7 @@ export default function CallbackPageClient() {
     async function verify() {
       const res = await fetch(`/api/payment/callback?reference=${reference}`);
       const data = await res.json();
+      console.log(data);
 
       if (data.success) {
         router.push("/payment/success");

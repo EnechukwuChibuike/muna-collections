@@ -18,7 +18,6 @@ model User {
 
   address   Address?
   orders    Order[]
-
 }
 
 model Address {
@@ -41,28 +40,35 @@ model Address {
   updatedAt DateTime @updatedAt
 }
 
+model Order {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  userId          String        @db.ObjectId
+  reference       String        @unique
+  amount          Int
+  status          OrderStatus   @default(PENDING)       // payment tracking
+  orderProgress   OrderProgress @default(PENDING)       // shipping/delivery progress
+  paymentMethod   String
+  shippingAddress Json
+  items           Json
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
 enum Role {
   USER
   ADMIN
-}
-
-model Order {
-  id             String       @id @default(auto()) @map("_id") @db.ObjectId
-  userId         String       @db.ObjectId
-  reference      String       @unique
-  amount         Int
-  status         OrderStatus  @default(PENDING)
-  paymentMethod  String
-  shippingAddress Json
-  items          Json
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-
-  user User @relation(fields: [userId], references: [id])
 }
 
 enum OrderStatus {
   PENDING
   PAID
   FAILED
+}
+
+enum OrderProgress {
+  PENDING
+  SHIPPING
+  DELIVERED
 }

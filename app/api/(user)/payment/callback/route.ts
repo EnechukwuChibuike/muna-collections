@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
 
 export async function GET(req: NextRequest) {
@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // Verify transaction with Paystack
+    // VERIFY PAYMENT
     const verifyRes = await fetch(
       `https://api.paystack.co/transaction/verify/${reference}`,
       {
@@ -32,6 +32,7 @@ export async function GET(req: NextRequest) {
     );
 
     const verifyData = await verifyRes.json();
+    console.log("VERIFY RESPONSE:", verifyData);
 
     if (!verifyData.status || verifyData.data.status !== "success") {
       return NextResponse.json({
@@ -40,26 +41,32 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    // Get session user
+    // FIX: correct session method
     const session = await getServerSession(authOptions);
+
     if (!session?.user?.email) {
       return NextResponse.json({
         success: false,
-        message: "Unauthorized",
+        message: "User not logged in",
       });
     }
 
     const userEmail = session.user.email;
 
-    // Save order
-    await prisma.order.create({
-      data: {
+    const metadata = verifyData.data.metadata;
+    console.log("METADATA:", metadata);
+
+    await prisma.order.upsert({
+      where: { reference },
+      update: {},
+      create: {
         user: { connect: { email: userEmail } },
         reference,
         amount: verifyData.data.amount / 100,
         status: "PAID",
-        shippingAddress: JSON.stringify(verifyData.data.metadata.address),
-        items: JSON.stringify(verifyData.data.metadata.items),
+        orderProgress: "PENDING",
+        shippingAddress: JSON.stringify(metadata.address),
+        items: JSON.parse(metadata.items),
         paymentMethod: "paystack",
       },
     });

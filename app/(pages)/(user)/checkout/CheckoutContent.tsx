@@ -17,6 +17,8 @@ interface CheckoutProps {
 
 export default function CheckoutContent({ savedAddress }: CheckoutProps) {
   const { items, total } = useCart();
+  console.log(items);
+
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(!!savedAddress);
   const [errors, setErrors] = useState<

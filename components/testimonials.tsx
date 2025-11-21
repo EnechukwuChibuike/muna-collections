@@ -6,7 +6,7 @@ const testimonials = [
   {
     id: 1,
     name: "Sarah Johnson",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/myai.png",
     rating: 5,
     text: "The quality is absolutely incredible! I've never had hair extensions that looked and felt so natural. Muna Collectionz has exceeded all my expectations.",
     product: "Luxury Straight Bundle",
@@ -14,7 +14,7 @@ const testimonials = [
   {
     id: 2,
     name: "Maya Patel",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/myai.png",
     rating: 5,
     text: "I'm obsessed with my new wig! The lace front is so seamless, and the hair is so soft and manageable. Worth every penny!",
     product: "Curly Lace Front Wig",
@@ -22,7 +22,7 @@ const testimonials = [
   {
     id: 3,
     name: "Jessica Williams",
-    image: "/placeholder.svg?height=80&width=80",
+    image: "/myai.png",
     rating: 5,
     text: "Customer service was amazing, and the hair arrived quickly. The body wave pattern is exactly what I wanted. I'll definitely be ordering again!",
     product: "Body Wave Extensions",

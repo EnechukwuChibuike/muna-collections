@@ -87,7 +87,19 @@ export default function Header() {
                 <Search className="h-5 w-5" />
               </Button> */}
 
-              <Link href="/account">
+              {/* Mobile: goes to /profile */}
+              <Link href="/profile" className="md:hidden">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="hover:bg-amber-50"
+                >
+                  <User className="h-5 w-5" />
+                </Button>
+              </Link>
+
+              {/* Desktop: goes to /profile/personal-info */}
+              <Link href="/profile/personal-info" className="hidden md:block">
                 <Button
                   variant="ghost"
                   size="icon"

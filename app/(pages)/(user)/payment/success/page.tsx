@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
-import Receipt from "./receipt";
+import ReceiptDownloadButton from "./ReceiptDownloadButton"; // Client component
 
 export default async function PaymentSuccessPage() {
   const session = await getServerSession(authOptions);
@@ -14,29 +14,34 @@ export default async function PaymentSuccessPage() {
     );
   }
 
+  // Fetch the most recent order
   const order = await prisma.order.findFirst({
     where: { user: { email: session.user.email } },
     orderBy: { createdAt: "desc" },
   });
 
-  console.log(order);
-
   if (!order) {
     return <p className="text-center p-10">No recent orders found.</p>;
   }
 
-  const items = JSON.parse(order.items as string);
+  // Parse items
+  const items: { name: string; quantity: number; price: number }[] =
+    typeof order.items === "string" ? JSON.parse(order.items) : order.items;
+
+  // Parse shipping address
   const shippingAddress =
     typeof order.shippingAddress === "string"
       ? JSON.parse(order.shippingAddress)
       : order.shippingAddress;
 
   return (
-    <Receipt
-      order={order}
-      items={items}
-      address={shippingAddress}
-      user={session.user}
-    />
+    <div className="min-h-screen flex flex-col items-center justify-center p-6">
+      <ReceiptDownloadButton
+        order={order}
+        items={items}
+        address={shippingAddress}
+        user={session.user}
+      />
+    </div>
   );
 }

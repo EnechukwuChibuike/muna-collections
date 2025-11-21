@@ -56,7 +56,13 @@ export async function POST(req: NextRequest) {
       fullName: form.fullName,
       phone: form.phone,
       address: `${form.street}, ${form.city}, ${form.state}, ${form.country}, ${form.postal}`,
-      items: items.map((item) => `${item.name} x${item.quantity}`),
+      items: JSON.stringify(
+        items.map((item) => ({
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+        }))
+      ),
     };
 
     console.log(
