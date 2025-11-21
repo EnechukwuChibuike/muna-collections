@@ -78,7 +78,7 @@ export default function OrderList({ orders }: { orders: Order[] }) {
               View Items
             </summary>
             <div className="mt-2 bg-gray-50 p-3 rounded text-sm space-y-2">
-              {order.items.map((item: any, idx: number) => (
+              {order.items.map((item, idx) => (
                 <div key={idx} className="border-b pb-2">
                   <p className="font-medium">{item.name}</p>
                   <p>Qty: {item.quantity}</p>

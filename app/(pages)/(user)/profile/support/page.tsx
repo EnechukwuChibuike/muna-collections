@@ -38,7 +38,7 @@ export default function SupportPage() {
       <div className="w-full max-w-xl bg-white rounded-xl shadow p-6 border">
         <h1 className="text-3xl font-bold text-center mb-4">Support</h1>
         <p className="text-center text-gray-600 mb-6">
-          We're here to help you! Choose how you want to reach us.
+          We&apos;re here to help you! Choose how you want to reach us.
         </p>
 
         {/* WhatsApp Chat */}
