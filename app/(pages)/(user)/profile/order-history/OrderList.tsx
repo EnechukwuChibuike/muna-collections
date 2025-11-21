@@ -14,7 +14,10 @@ type Order = {
   orderProgress: string;
   paymentMethod: string;
   items: OrderItem[];
-  createdAt: string;
+  createdAt: Date;
+  updatedAt: Date;
+  userId: string;
+  shippingAddress: string;
 };
 
 export default function OrderList({ orders }: { orders: Order[] }) {
